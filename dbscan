@@ -1,0 +1,20 @@
+from sklearn.cluster import DBSCAN
+import numpy as np
+
+# Coordinates of all 30 places stacked together
+coordinates = np.array([
+    [12.9507, 77.5848], [12.9767, 77.5958], [12.9999, 77.5921], [12.89, 77.5921], [12.9716, 77.5946],
+    [13.0093, 77.5511], [12.9486, 77.5845], [12.9629, 77.576], [12.9822, 77.6083], [13.1986, 77.7066],
+    [9.9667, 76.2444], [9.9571, 76.2422], [10.026, 76.3074], [10.1626, 76.1973], [9.9634, 76.2423],
+    [9.9482, 76.3534], [9.9613, 76.2701], [10.0261, 76.3101], [9.9636, 76.2446], [10.1518, 76.4013],
+    [18.9217, 72.8347], [18.9447, 72.8236], [19.0164, 72.83], [19.023, 72.8174], [18.9629, 72.9305],
+    [18.9401, 72.8357], [19.0978, 72.8275], [19.2183, 72.9187], [18.982, 72.8104], [19.0896, 72.8656]
+])
+distance_matrix = compute_haversine_distance_matrix(coordinates)
+# Apply DBSCAN clustering
+dbscan = DBSCAN(eps=50, min_samples=2)  # Adjust eps and min_samples according to your dataset
+labels = dbscan.fit_predict(distance_matrix)
+
+# Print the cluster labels
+print("Cluster Labels:")
+print(labels)
